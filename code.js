@@ -12,11 +12,12 @@ for (let i = 0; i < 1000; i++){
 
 let score = 0;
 let rocket = document.getElementById("rocketObstacle");
+let testPipe = new PipeObstacle(canvas, pencil, rocket);
 
 function raiseScore() {
     score += 1;
     let scoreElement = document.getElementById("scoreDisplay");
-    scoreElement.innerHTML = score;
+    scoreElement.innerHTML = "SCORE: " + score;
 }
 setInterval(raiseScore, 1000);
 
@@ -43,6 +44,15 @@ function gameLoop() {
             stars[i].y = Math.random() * canvas.height;
           }
     }
+
+    //draw pipes
+    testPipe.draw();
+    testPipe.move();
+    if (testPipe.x < -250){
+        testPipe.x = canvas.width;
+        testPipe.y = Math.random() * (150 - 50) + 50;
+        testPipe.gap = Math.random() * (350 - 250) + 250;
+    }
 }
 
 setInterval(gameLoop, 50);
@@ -52,5 +62,3 @@ function detectClick() {
 }
 
 canvas.addEventListener("click", detectClick);
-
-let testPipe = new PipeObstacle(canvas, pencil, rocket);
