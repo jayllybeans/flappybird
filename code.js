@@ -3,6 +3,7 @@ let pencil = canvas.getContext("2d");
 
 import {Star} from "./star.js";
 import {PipeObstacle} from "./pipeObstacle.js";
+import {Bird} from "./bird.js";
 
 let stars = [];
 
@@ -12,7 +13,7 @@ for (let i = 0; i < 1000; i++){
 
 let score = 0;
 let rocket = document.getElementById("rocketObstacle");
-let testPipe = new PipeObstacle(canvas, pencil, rocket);
+let pipe = new PipeObstacle(canvas, pencil, rocket);
 
 function raiseScore() {
     score += 1;
@@ -46,12 +47,12 @@ function gameLoop() {
     }
 
     //draw pipes
-    testPipe.draw();
-    testPipe.move();
-    if (testPipe.x < -250){
-        testPipe.x = canvas.width;
-        testPipe.y = Math.random() * (150 - 50) + 50;
-        testPipe.gap = Math.random() * (350 - 250) + 250;
+    pipe.draw();
+    pipe.move();
+    if (pipe.x < -pipe.width){
+        pipe.x = canvas.width;
+        pipe.y = Math.random() * (150 - 50) + 50;
+        pipe.gap = Math.random() * (350 - 250) + 250;
     }
 }
 
