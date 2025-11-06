@@ -1,5 +1,5 @@
 export class PipeObstacle {
-    x = 0;
+    x = 500;
     y = Math.random() * (150 - 50) + 50;
     width = 250;
     height = 500;

@@ -14,6 +14,10 @@ for (let i = 0; i < 1000; i++){
 let score = 0;
 let rocket = document.getElementById("rocketObstacle");
 let pipe = new PipeObstacle(canvas, pencil, rocket);
+let ufo = document.getElementById("ufoPlayer");
+let player = new Bird(canvas, pencil, ufo);
+
+pencil.imageSmoothingEnabled = false;
 
 function raiseScore() {
     score += 1;
@@ -22,6 +26,9 @@ function raiseScore() {
 }
 setInterval(raiseScore, 1000);
 
+function moveUp(){
+    player.y += 10;
+}
 
 function gameLoop() {
     //erase canvas
@@ -46,7 +53,7 @@ function gameLoop() {
           }
     }
 
-    //draw pipes
+    //pipes
     pipe.draw();
     pipe.move();
     if (pipe.x < -pipe.width){
@@ -54,12 +61,10 @@ function gameLoop() {
         pipe.y = Math.random() * (150 - 50) + 50;
         pipe.gap = Math.random() * (350 - 250) + 250;
     }
+
+    //draw bird
+    player.draw();
+    player.gravity();
 }
 
 setInterval(gameLoop, 50);
-
-function detectClick() {
-    console.log("Clicked!");
-}
-
-canvas.addEventListener("click", detectClick);
