@@ -4,10 +4,11 @@ export class Bird{
     ySpeed = 1;
     maxYSpeed = 20;
 
-    constructor(canvas, pencil, ufo){
+    constructor(canvas, pencil, ufo, keyPressed){
         this.canvas = canvas;
         this.pencil = pencil;
         this.ufo = ufo;
+        this.keyPressed = keyPressed;
     }
 
     draw(){
@@ -16,13 +17,17 @@ export class Bird{
 
     gravity(){
         this.y += this.ySpeed;
-        this.ySpeed*= 1.2;
+        this.ySpeed += .15;
         if (this.ySpeed > this.maxYSpeed){
             this.ySpeed = this.maxYSpeed;
         }
     }
 
-    movement(){
-        this.canvas.addEventListener("click", );
+    move(){
+        this.ySpeed = -2;
+    }
+
+    isCollision(pipeObstacle){
+        
     }
 }

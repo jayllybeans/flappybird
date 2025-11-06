@@ -3,10 +3,13 @@ export class PipeObstacle {
     y = Math.random() * (150 - 50) + 50;
     width = 250;
     height = 500;
-    gap = Math.random() * (350 - 250) + 250;
+    gap = Math.random() * (350 - 200) + 200;
     speed = 10;
 
     //pipe parts
+
+    topPipe = { xL : this.x, yL : this.y, xR : this.x + this.width, yR : this.y - (this.height - this.y)};
+    bottomPipe = { xL : this.x, yL : this.y + this.gap, xR : this.x + this.width, yR : this.y + this.gap + this.height};
 
     constructor(canvas, pencil, rocket){
         this.pencil = pencil;

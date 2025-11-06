@@ -11,6 +11,7 @@ for (let i = 0; i < 1000; i++){
     stars.push(new Star(canvas, pencil));
 }
 
+
 let score = 0;
 let rocket = document.getElementById("rocketObstacle");
 let pipe = new PipeObstacle(canvas, pencil, rocket);
@@ -25,10 +26,6 @@ function raiseScore() {
     scoreElement.innerHTML = "SCORE: " + score;
 }
 setInterval(raiseScore, 1000);
-
-function moveUp(){
-    player.y += 10;
-}
 
 function gameLoop() {
     //erase canvas
@@ -68,3 +65,9 @@ function gameLoop() {
 }
 
 setInterval(gameLoop, 50);
+
+function detectKey(){
+    player.move();
+}
+
+window.addEventListener("keydown", detectKey);
