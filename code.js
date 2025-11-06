@@ -20,12 +20,6 @@ let player = new Bird(canvas, pencil, ufo);
 
 pencil.imageSmoothingEnabled = false;
 
-function raiseScore() {
-    score += 1;
-    let scoreElement = document.getElementById("scoreDisplay");
-    scoreElement.innerHTML = "SCORE: " + score;
-}
-setInterval(raiseScore, 1000);
 
 function gameLoop() {
     //erase canvas
@@ -62,9 +56,23 @@ function gameLoop() {
     //draw bird
     player.draw();
     player.gravity();
+
+    if (player.x < 0 || player.x > canvas.height){
+        clearInterval(game);
+    }
+
+    let wasHit = player.isCollision(pipe);
+    if(wasHit) {
+        clearInterval(game);
+    }
+    else{
+        score += 1;
+        let scoreElement = document.getElementById("scoreDisplay");
+        scoreElement.innerHTML = "SCORE: " + score;
+    }
 }
 
-setInterval(gameLoop, 50);
+let game = setInterval(gameLoop, 50);
 
 function detectKey(){
     player.move();
