@@ -29,17 +29,17 @@ export class Bird{
 
     isCollision(pipeObstacle){
         //this detects collisions for the top pipe
-        let isFarEnoughRightTop = this.x > pipeObstacle.topPipe.xL;
-        let isLowEnoughTop = this.y > pipeObstacle.topPipe.yL;
-        let isFarEnoughLeftTop = this.x < pipeObstacle.topPipe.xR;
-        let isHighEnoughTop = this.y < pipeObstacle.topPipe.yR;
+        let isFarEnoughRightTop = this.x > pipeObstacle.topPipeTopLeft.x;
+        let isLowEnoughTop = this.y > pipeObstacle.topPipeTopLeft.y;
+        let isFarEnoughLeftTop = this.x < pipeObstacle.topPipeBottomRight.x;
+        let isHighEnoughTop = this.y < pipeObstacle.topPipeBottomRight.y;
+
+        let isFarEnoughRightBottom = this.x > pipeObstacle.bottomPipeTopLeft.x;
+        let isLowEnoughBottom = this.y > pipeObstacle.bottomPipeTopLeft.y;
+        let isFarEnoughLeftBottom = this.x < pipeObstacle.bottomPipeBottomRight.x;
+        let isHighEnoughBottom = this.y < pipeObstacle.bottomPipeBottomRight.y;
 
         //use the logic above to detect for the bottom pipe here:
-
-        let isFarEnoughRightBottom = this.x > pipeObstacle.bottomPipe.xL;
-        let isLowEnoughBottom = this.y > pipeObstacle.bottomPipe.yL;
-        let isFarEnoughLeftBottom = this.x < pipeObstacle.bottomPipe.xR;
-        let isHighEnoughBottom = this.y < pipeObstacle.bottomPipe.yR;
 
         if((isFarEnoughRightTop && isLowEnoughTop && isFarEnoughLeftTop && isHighEnoughTop) || (isFarEnoughRightBottom && isLowEnoughBottom && isFarEnoughLeftBottom && isHighEnoughBottom))
             return true;

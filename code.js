@@ -17,6 +17,7 @@ let rocket = document.getElementById("rocketObstacle");
 let pipe = new PipeObstacle(canvas, pencil, rocket);
 let ufo = document.getElementById("ufoPlayer");
 let player = new Bird(canvas, pencil, ufo);
+let scoreElement = document.getElementById("scoreDisplay");
 
 pencil.imageSmoothingEnabled = false;
 
@@ -51,6 +52,7 @@ function gameLoop() {
         pipe.x = canvas.width;
         pipe.y = Math.random() * (150 - 50) + 50;
         pipe.gap = Math.random() * (350 - 250) + 250;
+        pipe.scored = false;
     }
 
     //draw bird
@@ -63,12 +65,19 @@ function gameLoop() {
 
     let wasHit = player.isCollision(pipe);
     if(wasHit) {
+        score = 0;
+        pencil.clearRect(0, 0, canvas.width, canvas.height);
         clearInterval(game);
-    }
-    else{
-        score += 1;
-        let scoreElement = document.getElementById("scoreDisplay");
+        scoreElement.innerHTML = "GAME OVER! RESTARTING...";
+        player.x = 0;
+        player.y = 0;
+        game = setInterval(gameLoop, 50);
         scoreElement.innerHTML = "SCORE: " + score;
+    }
+    else if (!wasHit && !pipe.scored && player.x > pipe.x){
+        score += 1;
+        scoreElement.innerHTML = "SCORE: " + score;
+        pipe.scored = true;
     }
 }
 

@@ -5,11 +5,13 @@ export class PipeObstacle {
     height = 500;
     gap = Math.random() * (350 - 200) + 200;
     speed = 10;
+    scored = false;
 
     //pipe parts
-
-    topPipe = { xL : this.x, yL : this.y, xR : this.x + this.width, yR : this.y - (this.height - this.y)};
-    bottomPipe = { xL : this.x, yL : this.y + this.gap, xR : this.x + this.width, yR : this.y + this.gap + this.height};
+    topPipeTopLeft;
+    topPipeBottomRight;
+    bottomPipeTopLeft;
+    bottomPipeBottomRight;
 
     constructor(canvas, pencil, rocket){
         this.pencil = pencil;
@@ -18,7 +20,28 @@ export class PipeObstacle {
     }
 
     draw(){
-        this.pencil.drawImage(this.rocket, this.x, this.y - (this.height - this.y), this.width, this.height);
+        
+        this.topPipeTopLeft = { 
+            x : this.x,
+            y : this.y - this.height
+        }
+
+        this.topPipeBottomRight = { 
+            x : this.x + this.width,
+            y : this.y - this.height + this.height
+        }
+
+        this.bottomPipeTopLeft = {
+            x : this.x,
+            y : this.y + this.gap
+        }
+
+        this.bottomPipeBottomRight = {
+            x : this.x + this.width,
+            y : this.y + this.gap + this.height
+        }
+
+        this.pencil.drawImage(this.rocket, this.x, this.y - this.height, this.width, this.height);
         this.pencil.drawImage(this.rocket, this.x, this.y + this.gap, this.width, this.height);
     }
 
