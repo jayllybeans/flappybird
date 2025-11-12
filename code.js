@@ -60,7 +60,14 @@ function gameLoop() {
     player.gravity();
 
     if (player.x < 0 || player.x > canvas.height){
+        score = 0;
+        pencil.clearRect(0, 0, canvas.width, canvas.height);
         clearInterval(game);
+        scoreElement.innerHTML = "GAME OVER! RESTARTING...";
+        player.x = 0;
+        player.y = 0;
+        game = setInterval(gameLoop, 50);
+        scoreElement.innerHTML = "SCORE: " + score;
     }
 
     let wasHit = player.isCollision(pipe);
